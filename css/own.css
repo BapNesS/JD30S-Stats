@@ -1,0 +1,148 @@
+/* Polices, Rooooxane ! */
+/*
+* {
+    font-family: 'Questrial', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Muli', sans-serif;
+}
+*/
+
+
+/* A moi, rien qu'à moi ! */
+#blockAllStats,
+#blockSecond,
+#blockPlayer,
+#blockAllPlayers
+    {
+        display: none;
+    }
+
+.upper {
+    text-transform: uppercase;   
+}
+
+.firstContainer {
+    margin-top: 24px;   
+}
+.subtitle {
+    font-weight: 400;
+}
+.gender {
+ padding-right: 8px;   
+ padding-left: 8px;   
+}
+
+a.socialLink {
+    margin-right: 8px;
+}
+
+a.socialLink img {
+ width: 24px;
+}
+
+.nav-wrapper {
+    margin-left : 24px;
+    margin-right : 24px;
+}
+
+h3 {
+    font-weight: 200;
+}
+p, #blockAllPlasyers h5 {
+    font-weight: 300;
+}
+.playerStats {
+    font-size: 0.85em;
+    margin-top : 0;
+}
+
+body {
+    background: white;
+}
+
+ul.rules li {
+    font-weight: 300;
+    font-size: 15pt;
+    margin-bottom: 28px;
+}
+
+div.promo i.material-icons {
+ font-size: 7em;   
+}
+
+div.promoBlock {
+ padding-bottom: 16px;   
+}
+
+.customPB {
+  height: 120px;
+  width: 120px;
+  margin: 0px auto;
+  margin-top: 12px;
+  font-size: 40px;
+  text-align: center;
+  line-height: 120px;
+}
+
+
+/* Surcharges */
+footer.page-footer {
+    margin-top: 0px;
+    font-weight: 300;
+}
+
+footer a {
+    text-decoration: underline;
+}
+
+.tabs li.tab a:hover {
+    color: #f48fb1;
+}
+
+footer a:hover {
+    text-decoration: none;
+}
+
+.rowForTabs {
+    margin-bottom: 0px;   
+}
+
+.tabs .indicator {
+    height: 4px;
+    background-color: white;
+}
+
+.tabs li.tab a {
+    color: white;   
+}
+.tabs li.tab.active {
+    color: white;   
+}
+     
+
+/* show-on-large */
+@media only screen and (min-width: 993px) {
+    .container.plaincontainer {
+        width: 100%;
+        max-width: 95%
+    }
+    .parallax-container {
+          height: 500px;
+    }
+}
+
+/* show-on-medium */
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+    .parallax-container {
+          height: 300px;
+    }
+}
+
+/* show-on-small */
+@media only screen and (max-width: 600px) {
+    .parallax-container {
+          height: 150px;
+    }
+}

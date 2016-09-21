@@ -1,9 +1,526 @@
-<!doctype html>
-<html>
-<head>
-    <title>Init</title>
-</head>
-<body>
-    Init
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="fr-FR" ng-app="wApp">
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="./bower_components/materialize/dist/css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        
+    <!--Import jQuery before materialize.js-->
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>if (!window.jQuery) { document.write('<script src="bin/jquery-2.1.1.min.js"><\/script>'); }</script>
+
+    <script type="text/javascript" src="./bower_components/materialize/dist/js/materialize.min.js"></script>
+    <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="./bower_components/progressbar.js/dist/progressbar.min.js"></script>
+    
+    <script type="text/javascript" src="./js/filters.js"></script>
+    <script type="text/javascript" src="./js/own.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+    <script type="text/javascript" src="./js/controls.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+        
+    <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="./bower_components/components-font-awesome/css/font-awesome.css"></link>
+    
+    <!-- On a le style -->
+    <link type="text/css" rel="stylesheet" href="./css/own.css"></link>
+        
+        
+    </head>
+
+    <body ng-controller="WPlayerCtrl">
+        
+      <div class="navbar-fixed" name="top">
+        <nav class="light-blue darken-2">
+          <div class="nav-wrapper">
+            <a href="#top" class="btn-blockHome brand-logo">JD30S-Stats</a>
+            <ul class="upper right hide-on-med-and-down" >
+              <li class="navSelectable active"><a href="#top" class="btn-blockHome">Le jeu</a></li>
+              <li class="navSelectable"><a href="#top" class="btn-blockAllStats">Stats</a></li>
+              <li class="navSelectable btn-player-bruno"><a href="#top" class="btn-blockPlayer btn-player-bruno" ng-click="changePlayer('bruno')">Bruno</a></li>
+              <li class="navSelectable btn-player-christina"><a href="#top" class="btn-blockPlayer btn-player-christina" ng-click="changePlayer('christina')">Christina</a></li>
+              <li class="navSelectable btn-player-elliot"><a href="#top" class="btn-blockPlayer btn-player-elliot" ng-click="changePlayer('elliot')">Elliot</a></li>
+              <li class="navSelectable btn-player-vacher"><a href="#top" class="btn-blockPlayer btn-player-vacher" ng-click="changePlayer('vacher')">Vacher</a></li>
+              <li class="navSelectable"><a href="#top" class="btn-blockAllPlayers">Tous les joueurs</a></li>
+              <li class="navSelectable"><a href="#top" class="btn-blockTools">Outils</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+        
+        <div class="row rowForTabs hide-on-large-only">
+          <ul class="tabs pink">
+            <li class="pink tab col s3"><a href="#top" class="navSelectable tab-btn-blockHome active">Le jeu</a></li>
+            <li class="pink tab col s3"><a href="#top" class="navSelectable tab-btn-blockAllStats">Stats</a></li>
+            <li class="pink tab col s3"><a href="#top" class="navSelectable tab-btn-blockPlayer btn-player-bruno" ng-click="changePlayer('bruno')">Bruno</a></li>
+            <li class="pink tab col s3"><a href="#top" class="navSelectable tab-btn-blockPlayer btn-player-christina" ng-click="changePlayer('christina')">Christina</a></li>
+            <li class="pink tab col s3"><a href="#top" class="navSelectable tab-btn-blockPlayer btn-player-elliot" ng-click="changePlayer('elliot')">Elliot</a></li>
+            <li class="pink tab col s3"><a href="#top" class="navSelectable tab-btn-blockPlayer btn-player-vacher" ng-click="changePlayer('vacher')">Vacher</a></li>
+            <li class="pink tab col s3"><a href="#top" class="navSelectable tab-btn-blockAllPlayers">Tous les joueurs</a></li>
+            <li class="pink tab col s3"><a href="#top" class="navSelectable tab-btn-blockTools">Outils</a></li>
+          </ul>
+      </div>
+        
+
+        <div id="blockPlayer">
+            
+          <div class="container firstContainer">
+                
+                <div class="row">
+                    <div class="col s12 m6 l3 center-align">
+                        <img src="./images/profile_{{sPlayer.id}}.jpg" alt="" class="z-depth-1 circle responsive-img" style="width: 75%;">
+                    </div>
+                    <div class="col s12 m6 l9">
+                        <h2>{{sPlayer.surname}}</h2>
+                        <p class="subtitle">Son petit nom : {{sPlayer.completename}} <img src="./images/16_gender_{{sPlayer.gender}}.png" class="gender"><br/>
+                            Son équipe : {{findTeamById(sPlayer.team).name}}</p>
+                        <p>
+                            <a target="_blank" href="https://www.facebook.com/{{sPlayer.social.facebook}}/" class="socialLink" ng-show="sPlayer.social.facebook != ''"><img src="./images/facebook color.1.png"></a>
+                            <a target="_blank" href="https://www.twitter.com/@{{sPlayer.social.twitter}}" class="socialLink" ng-show="sPlayer.social.twitter != ''"><img src="./images/twitter color.1.png"></a>
+                            <a target="_blank" href="https://www.instagram.com/{{sPlayer.social.instagram}}" class="socialLink" ng-show="sPlayer.social.instagram != ''"><img src="./images/instagram color.1.png"></a>
+                            <a target="_blank" href="https://www.snapchat.com/add/{{sPlayer.social.snapchat}}" class="socialLink" ng-show="sPlayer.social.snapchat != ''"><img src="./images/snapchat color.1.png"></a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text">
+                            <h5 class="center-align">Participations</h5>
+                             <div id="participationPB" class="customPB"></div>
+                            <p class="center-align">{{sStat.totalGame.value}} parties jouées par {{sPlayer.surname}} sur {{allstats.totalGame}} parties au total.</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text">
+                            <h5 class="center-align">Victoires</h5>
+                             <div id="winGamePB" class="customPB"></div>
+                            <p class="center-align">{{sStat.winGame.value}} parties gagnées, {{sStat.totalGame.value-sStat.winGame.value}} perdues.<br/>
+                                Matchs nuls remportés : {{sStat.nbDrawWin.value}} / {{sStat.nbDraw.value}}.</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text">
+                            <h5 class="center-align" ng-show="sPlayer.gender == 'TRUE'">Amazone ?</h5>
+                            <h5 class="center-align" ng-hide="sPlayer.gender == 'TRUE'">Don Juan ?</h5>
+                             <div id="genderRepPB" class="customPB"></div>
+                            <p class="center-align">{{sStat.gameWithFemale.value}}/{{sStat.totalGame.value}} parties jouées l'ont été avec des demoiselles.</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text">
+                            <h5 class="center-align">Arbitre</h5>
+                             <div id="arbitrePB" class="customPB"></div>
+                            <p class="center-align">{{sStat.nbArbitration.value}} fois sur {{allstats.totalArbitratorGame}} parties arbitrées.<br/>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                
+                    
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text">
+                            <h5 class="center-align">Sexe faible ?</h5>
+                            <p class="center-align">
+                                {{sStat.gameWinWithFemale.value}}/{{sStat.gameWithFemale.value}} gagnées avec <strong>une auditrice</strong>.
+                                <br/>
+                                {{sStat.winGame.value - sStat.gameWinWithFemale.value}}/{{sStat.totalGame.value - sStat.gameWithFemale.value}} gagnées avec <strong>un auditeur</strong>.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text">
+                            <h5 class="center-align">Dernière partie</h5>
+                            <p class="center-align">{{sStat.lastGame.value + "T00:00:00" | date:'dd/MM/yyyy'}}</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text">
+                            <h5 class="center-align">Dernière victoire</h5>
+                            <p class="center-align" ng-show="sStat.lastWin.value != null">{{sStat.lastWin.value + "T00:00:00" | date:'dd/MM/yyyy'}}</p>
+                            <p class="center-align" ng-show="sStat.lastWin.value == null">Euh&#133; aucune!<br/>&nbsp;</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text">
+                            <h5 class="center-align">Dernière défaite</h5>
+                            <p class="center-align" ng-show="sStat.lastLoose.value != null">{{sStat.lastLoose.value + "T00:00:00" | date:'dd/MM/yyyy'}}</p>
+                            <p class="center-align" ng-show="sStat.lastLoose.value == null">Aucune! C'est qui le lion ?<br/>&nbsp;</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col s12 m6 l4">
+                        <div class="card-panel pink white-text">
+                            <h5 class="center-align">Meilleurs scores</h5>
+                                <ol>
+                                    <li ng-show="sStat.bestScore.a.value != null">{{sStat.bestScore.a.value}} points, le {{sStat.bestScore.a.subvalue}}</li>
+                                    <li ng-show="sStat.bestScore.b.value != null">{{sStat.bestScore.b.value}} points, le {{sStat.bestScore.b.subvalue}}</li>
+                                    <li ng-show="sStat.bestScore.c.value != null">{{sStat.bestScore.c.value}} points, le {{sStat.bestScore.c.subvalue}}</li>
+                                </ol>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l4">
+                        <div class="card-panel light-blue darken-2 white-text">
+                            <h5 class="center-align">Bête noire de</h5>
+                                <ol>
+                                    <li ng-show="sStat.nemesisOf.a.subvalue != null"><a href="#top" class="white-text" ng-click="changePlayer(sStat.nemesisOf.a.value)"><strong>{{findPlayerById(sStat.nemesisOf.a.value).surname}}</strong></a> a perdu à <strong>{{sStat.nemesisOf.a.subvalue}} reprise(s)</strong></li>
+                                    <li ng-show="sStat.nemesisOf.b.subvalue != null"><a href="#top" class="white-text" ng-click="changePlayer(sStat.nemesisOf.b.value)"><strong>{{findPlayerById(sStat.nemesisOf.b.value).surname}}</strong></a> a perdu à <strong>{{sStat.nemesisOf.b.subvalue}} reprise(s)</strong></li>
+                                    <li ng-show="sStat.nemesisOf.c.subvalue != null"><a href="#top" class="white-text" ng-click="changePlayer(sStat.nemesisOf.c.value)"><strong>{{findPlayerById(sStat.nemesisOf.c.value).surname}}</strong></a> a perdu à <strong>{{sStat.nemesisOf.c.subvalue}} reprise(s)</strong></li>
+                                </ol>
+                                <p class="center-align" ng-show="sStat.nemesisOf.a.subvalue == null">Personne pour le moment&#133;</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l4">
+                        <div class="card-panel brown darken-2 white-text">
+                            <h5 class="center-align">Ses bêtes noires</h5>
+                                <ol>
+                                    <li ng-show="sStat.nemesisIs.a.subvalue != null"><a href="#top" class="white-text" ng-click="changePlayer(sStat.nemesisIs.a.value)"><strong>{{findPlayerById(sStat.nemesisIs.a.value).surname}}</strong></a> l'a battu {{sStat.nemesisIs.a.subvalue}} fois</li>
+                                    <li ng-show="sStat.nemesisIs.b.subvalue != null"><a href="#top" class="white-text" ng-click="changePlayer(sStat.nemesisIs.b.value)"><strong>{{findPlayerById(sStat.nemesisIs.b.value).surname}}</strong></a> l'a battu {{sStat.nemesisIs.b.subvalue}} fois</li>
+                                    <li ng-show="sStat.nemesisIs.c.subvalue != null"><a href="#top" class="white-text" ng-click="changePlayer(sStat.nemesisIs.c.value)"><strong>{{findPlayerById(sStat.nemesisIs.c.value).surname}}</strong></a> l'a battu {{sStat.nemesisIs.c.subvalue}} fois</li>
+                                </ol>
+                                <p class="center-align" ng-show="sStat.nemesisIs.a.subvalue == null">Personne pour le moment&#133;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+      </div>
+        <div id="blockAllStats" ng-controller="WListAllStatsCtrl">
+            
+                  <div class="container">
+                      <div class="row">
+                          <div class="col l12">
+                              <h1>Quelques statistiques</h1>
+                              
+                               <table class="striped centered">
+                                <thead>
+                                  <tr>
+                                      <th> 
+                                      
+                                          <a href="#" class="black-text" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+                                            Joueurs
+                                            <span ng-show="sortType == 'id' && !sortReverse" class="pink-text material-icons" style="font-size: 20px;">keyboard_arrow_down</span>
+                                            <span ng-show="sortType == 'id' && sortReverse" class="pink-text material-icons" style="font-size: 20px;">keyboard_arrow_up</span>
+                                            <span ng-show="sortType != 'id'" class="grey-text text-lighten-1 material-icons" style="font-size: 20px;">sort</span>
+                                          </a>
+                                      
+                                      </th>
+                                      <th>
+                                      
+                                          <a href="#" class="black-text" ng-click="sortType = 'win'; sortReverse = !sortReverse">
+                                            Victoires
+                                            <span ng-show="sortType == 'win' && !sortReverse" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_down</span>
+                                            <span ng-show="sortType == 'win' && sortReverse" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_up</span>
+                                            <span ng-show="sortType != 'win'" class="grey-text text-lighten-1 material-icons" style="font-size: 16px;">sort</span>
+                                          </a>
+                                      </th>
+                                      <th>
+                                      
+                                          <a href="#" class="black-text" ng-click="sortType = 'defeat'; sortReverse = !sortReverse">
+                                            Défaites
+                                            <span ng-show="sortType == 'defeat' && !sortReverse" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_down</span>
+                                            <span ng-show="sortType == 'defeat' && sortReverse" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_up</span>
+                                            <span ng-show="sortType != 'defeat'" class="grey-text text-lighten-1 material-icons" style="font-size: 16px;">sort</span>
+                                          </a>
+                                      </th>
+                                      <th>
+                                      
+                                          <a href="#" class="black-text" ng-click="sortType = 'total'; sortReverse = !sortReverse">
+                                            Parties
+                                            <span ng-show="sortType == 'total' && !sortReverse" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_down</span>
+                                            <span ng-show="sortType == 'total' && sortReverse" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_up</span>
+                                            <span ng-show="sortType != 'total'" class="grey-text text-lighten-1 material-icons" style="font-size: 16px;">sort</span>
+                                          </a>
+                                      </th>
+                                      <th>
+                                      
+                                            Taux de victoire
+                                      </th>
+                                          
+                                  </tr>
+                                </thead>
+
+                                <tbody>
+                                    
+                                    
+                                  <tr ng-repeat="lane in allstats.table | orderBy:sortType:sortReverse">
+                                      <td><a href="#top" ng-click="changePlayer(lane.id)"><strong>{{ findPlayerById(lane.id).surname }}</strong></a></td>
+                                    <td>{{ lane.win }}</td>
+                                    <td>{{ lane.defeat }}</td>
+                                    <td>{{ lane.total }}</td>
+                                    <td>{{lane.win/lane.total | percentage:1}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              
+                          </div>
+                    </div>
+                <div class="row">
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text center-align">
+                            <h4>{{allstats.totalGame}}</h4>
+                            <p>Parties jouées</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text center-align">
+                            <h4>{{allstats.totalArbitratorGame}}</h5>
+                            <p>Match nuls</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text center-align">
+                            <h4>{{allstats.totalPoints}}</h5>
+                            <p>Points marqués</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text center-align">
+                            <h4>{{allstats.totalPoints / (2*allstats.totalGame) | number:1}}</h5>
+                            <p>Moyen de points</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            
+            
+      </div>
+        <div id="blockAllPlayers" ng-controller="WListPlayersCtrl">
+            
+            
+            <div ng-repeat="team in teams">
+
+                  <div class="container">
+                      <div class="row">
+                          <div class="col l12">
+                            <h4 style="margin-top: 0px; padding-top: 1em">{{ team.name }}</h4>
+                            <p>{{ team.info }}</p>
+                          </div>
+                    </div>
+                </div>
+              <div class="container">
+
+                    <div class="row">
+                    <div class="col s12 m6 l3 center-align" ng-repeat="p in team.players">
+                        <a href="#top" ng-click="changePlayer(p)"><img src="./images/profile_{{p}}.jpg" alt="" class="z-depth-1 circle responsive-img" style="width: 50%;"></a>
+                        <br/>
+                        <h5>{{findPlayerById(p).surname}}</h5>
+                        <p class="playerStats"><a href="#top" class="pink-text" ng-click="changePlayer(p)">Voir ses stats</a></p>
+                    </div>
+                  </div>
+
+                </div>
+        </div>
+
+            
+      </div>
+
+        <div id="blockHome">
+        
+                <div class="parallax-container hide-on-med-and-down">
+                    <div class="parallax"><img src="./images/home-1500x500-large.jpg"></div>
+                </div>
+
+                <div class="parallax-container hide-on-small-only hide-on-large-only">
+                    <div class="parallax"><img src="./images/home-1500x500-medium.jpg"></div>
+                </div>
+
+                <div class="parallax-container hide-on-med-and-up">
+                    <div class="parallax"><img src="./images/home-1500x500-small.jpg"></div>
+                </div>
+
+        <div class="light-blue darken-1 white-text">
+            <div class="container">
+                 <div class="row">
+                  <div class="col s12 center-align">
+                    <h3>Les règles du <em>Jeu des 30 secondes</em></h3> 
+                      <p>Elles sont simples et claires.</p>
+                 </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+         <div class="row">
+             <div class="col s12 l8 offset-l2">
+                 
+                <ul class="rules">
+                    <li>
+                        Deux auditeurs s'opposent. Chacun choisi quelqu'un de l'équipe qui <u>en 30 secondes</u> va tenter de lui faire deviner un maximum de mots.
+                    </li>
+                    <li>
+                        Celui qui doit faire découvrir les mots ne les découvre qu'au lancement du chronomètre.
+                    </li> 
+                    <li>
+                        On ne peut pas passer un mot.
+                    </li> 
+                    <li>
+                        L'auditeur peut faire autant de proposition qu'il souhaite.
+                    </li> 
+                    <li>
+                        On ne peut pas utiliser des mots de la même racine.<br/>Exemple : pas le droit d'utiliser <em>tournevis</em> pour faire deviner <em>vis</em>.
+                    </li> 
+                    <li>
+                        <span class="light-blue-text text-darken-1">En cas d'égalité</span>, un dernier mot doit être découvert par les deux auditeurs. Le premier qui le trouve a gagner!
+                    </li>
+                    <li>
+                        <span class="pink-text">NOUVELLE RÈGLE !</span> Le gagnant du jeu des 30 secondes revient le lendemain, jusqu'à ce qu'il soit détrôné.
+                    </li>
+                    <li>
+                        <span class="pink-text">NOUVELLE RÈGLE !</span> En cas d'égalité, le champion ne revient pas automatiquement le lendemain.
+                    </li> 
+                 </ul>
+             </div>
+            </div>
+        </div>
+        
+        <div class="grey lighten-4 promoBlock">
+            <div class="container">
+                 <div class="row">
+                      <div class="col s12 center-align">
+                        <h3>Découvrez le site</h3> 
+                     </div>
+                    </div>
+
+                 <div class="row center-align">
+                      <div class="col s12 m4 promo">
+                         <i class="material-icons pink-text text-lighten-1">insert_chart</i>
+                          <h5>Statistiques</h5>
+                          <p>Comment la marée, elles sont généralement assez fraîches depuisla rentrée 2016.</p>
+
+                        <a class="waves-effect waves-light btn pink btn-blockAllStats" href="#top">Stats</a>
+                     </div>
+                      <div class="col s12 m4 promo">
+                         <i class="material-icons pink-text text-lighten-1">group</i>
+                          <h5>Joueurs</h5>
+                          <p>Qui sont les joueurs du <em>Jeu des 30 secondes</em> ?</p>
+
+                        <a class="waves-effect waves-light btn pink btn-blockAllPlayers" href="#top">Tous les joueurs</a>
+                     </div>
+                      <div class="col s12 m4 promo">
+                         <i class="material-icons pink-text text-lighten-1">developer_board</i>
+                          <h5>Outils</h5>
+                          <p>Vous voulez jouer chez vous ? Nous vous avons dégoter quelques outils pour vous faciliter la vie.</p>
+
+                        <a class="waves-effect waves-light btn pink btn-blockTools" href="#top">Boîte à outils</a>
+                     </div>
+                 </div>
+
+            </div>
+        </div>
+            <div class="container" style="display: none;">
+
+        
+        <h5>Inspi design</h5>
+        <ul>
+        
+            <li>https://www.android.com/</li>
+            <li>https://site.uplabs.com/posts/foodly-product-constructor</li>
+            <li>https://material.uplabs.com/posts/mixaline-color</li>
+        </ul>
+        <h5>Inspi g&eacute;n&eacute;rateur :</h5>
+        <ul>
+        
+            <li>http://www.palabrasaleatorias.com/mots-aleatoires.php?fs=10&fs2=0&Submit=Nouveau+mot</li>
+        </ul>
+            
+            <pre>
+            a
+            b
+            c
+            d
+            e
+            f
+            a
+            b
+            c
+            d
+            e
+            f
+            a
+            b
+            c
+            d
+            e
+            f
+            a
+            b
+            c
+            d
+            e
+            f
+            a
+            b
+            c
+            d
+            e
+            f</pre>
+            </div>
+        </div>
+
+        <footer class="page-footer grey lighten-2 black-text">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 m8 s12">
+                <h5 class="black-text">JD30S-Stats</h5>
+                <p class="black-text text-lighten-4">Ce site présente les statistiques du <em>Jeu des 30 secondes</em> de l'émission <em>Bruno dans la radio</em> diffusée sur Fun Radio.</p>
+                <p class="black-text text-lighten-4">En aucun cas nous ne sommes affiliés à l'émission ou à la radio.</p>
+                <p class="black-text text-lighten-4">Nous faisons cela que pour le fun. :)</p>
+              </div>
+              <div class="col m4 offset-l2 s12">
+                <h5 class="black-text">Liens</h5>
+                <ul>
+                  <li><a class="black-text text-lighten-3" href="http://www.funradio.fr/" target="_blank">FunRadio.fr</a></li>
+                  <li><a class="black-text text-lighten-3" href="http://www.funradio.fr/emission/bruno-dans-la-radio" target="_blank">Bruno dans la radio</a></li>
+                  <li>Application Fun Radio : <a class="black-text text-lighten-3" href="https://play.google.com/store/apps/details?id=com.funradio.android.activity&hl=fr" target="_blank">Android</a>, <a class="black-text text-lighten-3" href="https://itunes.apple.com/fr/app/fun-radio-le-son-dancefloor/id310863114?mt=8" target="_blank">iOS.</a></li>
+                  <li>Application BDLR : <a class="black-text text-lighten-3" href="https://play.google.com/store/apps/details?id=com.tapptic.bdlr" target="_blank">Android</a>, <a class="black-text text-lighten-3" href="https://itunes.apple.com/fr/app/bruno-dans-la-radio/id571648939?mt=8" target="_blank">iOS.</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright grey lighten-1">
+            <div class="container black-text">
+            Édition 2016
+            <a class="black-text text-lighten-4 right modal-trigger" href="#modal1">En savoir plus</a>
+            </div>
+          </div>
+        </footer>
+              <!-- Modal Structure -->
+              <div id="modal1" class="modal">
+                <div class="modal-content black-text">
+                  <h4>En savoir plus</h4>
+                  <p>Ce site a été créé simplement pour le fun. C'est marrant &ccedil;;a, pour le <em>fun</em>, pour le <em>FUN</em>. Bref&#133;</p>
+                  <p>Ce site a été créé simplement pour le fun. C'est marrant &ccedil;;a, pour le <em>fun</em>, pour le <em>FUN</em>. Bref&#133;</p>
+                  <p>Pour ceux que cela intéresse, les libraires et outils utilisés sont les suivants :</p>
+                    <ul>
+                        <li>Angular</li>
+                        <li>Bower</li>
+                        <li>Brackets</li>
+                        <li>Font Awesome</li>
+                        <li>GitHub</li>
+                        <li>Google Fonts</li>
+                        <li>JQuery</li>
+                        <li>Material Icons</li>
+                        <li>Materialize CSS</li>
+                        <li>ProgressBar.js</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat pink-text">Ok, cool</a>
+                </div>
+              </div>
+            
+    
+    </body>
+  </html>
