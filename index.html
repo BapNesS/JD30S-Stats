@@ -89,7 +89,7 @@
                             <a target="_blank" href="https://www.instagram.com/{{sPlayer.social.instagram}}" class="socialLink" ng-show="sPlayer.social.instagram != ''"><img src="./images/instagram color.1.png"></a>
                             <a target="_blank" href="https://www.snapchat.com/add/{{sPlayer.social.snapchat}}" class="socialLink" ng-show="sPlayer.social.snapchat != ''"><img src="./images/snapchat color.1.png"></a>
                         </p>
-                              <p class="deep-orange-text">Parties prises en compte : du <strong>29/08/2016 au 21/09/2016</strong>.</p>
+                              <p class="deep-orange-text">Parties prises en compte : du <strong>29/08/2016 au {{allstats.lastDate + "T00:00:00" | date:'dd/MM/yyyy'}}</strong>.</p>
                     </div>
                 </div>
                 
@@ -204,7 +204,7 @@
                           <div class="col l12">
                               <h1>Quelques statistiques</h1>
                               
-                              <p class="deep-orange-text">Parties prises en compte : du <strong>29/08/2016 au 21/09/2016</strong>.</p>
+                              <p class="deep-orange-text">Parties prises en compte : du <strong>29/08/2016 au {{allstats.lastDate + "T00:00:00" | date:'dd/MM/yyyy'}}</strong>.</p>
                               
                                <table class="striped centered">
                                 <thead>
@@ -295,6 +295,72 @@
                         </div>
                     </div>
                 </div>
+                      
+                      <div class="row">
+                          <div class="col l12">
+                              <h4>Les parties</h4>
+                              
+                              
+                               <table class="striped centered">
+                                <thead>
+                                  <tr>
+                                      <th> 
+                                            Date
+                                      </th>
+                                      <th>
+                                            Joueur n°1
+                                      </th>
+                                      <th>
+                                            
+                                      </th>
+                                      <th>
+                                            
+                                      </th>
+                                      <th>
+                                      
+                                            Joueur n°2
+                                      </th>
+                                      <th>
+                                            Arbitre
+                                      </th>
+                                          
+                                  </tr>
+                                </thead>
+
+                                <tbody>
+                                    
+                                    
+                                  <tr ng-repeat="lane in games">
+                                    <td>{{ lane.date + "T00:00:00" | date:'dd/MM/yyyy' }}</td>
+                                    <td><a href="#top"  ng-click="changePlayer(lane.playerA_id)"><strong>{{ findPlayerById(lane.playerA_id).surname }}</strong></a></td>
+                                    <td>
+                                      <strong ng-show="lane.playerA_id == lane.winner_id">
+                                      {{ lane.playerA_points }} pts 
+                                        <i class="fa fa-trophy amber-text text-darken-3" aria-hidden="true"></i>
+                                          </strong>
+                                      <span ng-show="lane.playerA_id != lane.winner_id">
+                                      {{ lane.playerA_points }} pts 
+                                          </span>
+                                      </td>
+                                      
+                                      
+                                    <td>
+                                      <strong ng-show="lane.playerB_id == lane.winner_id">
+                                        <i class="fa fa-trophy amber-text text-darken-3" aria-hidden="true"></i>
+                                      {{ lane.playerB_points }} pts 
+                                          </strong>
+                                      <span ng-show="lane.playerB_id != lane.winner_id">
+                                      {{ lane.playerB_points }} pts 
+                                          </span>
+                                      </td>
+                                      <td><a href="#top"  ng-click="changePlayer(lane.playerB_id)"><strong>{{ findPlayerById(lane.playerB_id).surname }}</strong></a></td>
+                                    <td>{{ findPlayerById(lane.arbitrator_id).surname }}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              
+                          </div>
+                    </div>
                 </div>
             
             
@@ -437,7 +503,7 @@
                       <div class="col s12 m4 promo">
                          <i class="material-icons pink-text text-lighten-1">insert_chart</i>
                           <h5>Statistiques</h5>
-                          <p>Comment la marée, elles sont généralement assez fraîches depuisla rentrée 2016.</p>
+                          <p>Comment la marée, elles sont généralement assez fraîches depuis la rentrée 2016.</p>
 
                         <a class="waves-effect waves-light btn pink btn-blockAllStats" href="#top">Stats</a>
                      </div>
@@ -451,7 +517,7 @@
                       <div class="col s12 m4 promo">
                          <i class="material-icons pink-text text-lighten-1">developer_board</i>
                           <h5>Outils</h5>
-                          <p>Vous voulez jouer chez vous ? Nous vous avons dégoter quelques outils pour vous faciliter la vie.</p>
+                          <p>Vous voulez jouer chez vous ? Nous vous avons d&eacute;got&eacute; quelques outils pour vous faciliter la vie.</p>
 
                         <a class="waves-effect waves-light btn pink btn-blockTools" href="#top">Boîte à outils</a>
                      </div>
