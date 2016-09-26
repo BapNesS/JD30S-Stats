@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr-FR" ng-app="wApp">
     <head>
+        
+        <title>Statistiques du jeu des 30 secondes. #BDLR</title>
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
@@ -205,6 +207,39 @@
                               <h1>Quelques statistiques</h1>
                               
                               <p class="deep-orange-text">Parties prises en compte : du <strong>29/08/2016 au {{allstats.lastDate + "T00:00:00" | date:'dd/MM/yyyy'}}</strong>.</p>
+                              <h4>Les chiffres</h4>
+                          </div>
+                      </div>
+                      
+                <div class="row">
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text center-align">
+                            <h4>{{allstats.totalGame}}</h4>
+                            <p>Parties jouées</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text center-align">
+                            <h4>{{allstats.totalArbitratorGame}}</h5>
+                            <p>Match nuls</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text center-align">
+                            <h4>{{allstats.totalPoints}}</h5>
+                            <p>Points marqués</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="card-panel grey lighten-5 black-text center-align">
+                            <h4>{{allstats.totalPoints / (2*allstats.totalGame) | number:1}}</h5>
+                            <p>Moyen de points</p>
+                        </div>
+                    </div>
+                </div>
+                      <div class="row">
+                          <div class="col l12">
+                              <h4>Les statistiques de l'équipe</h4>
                               
                                <table class="striped centered">
                                 <thead>
@@ -269,36 +304,78 @@
                               
                           </div>
                     </div>
-                <div class="row">
-                    <div class="col s12 m6 l3">
-                        <div class="card-panel grey lighten-5 black-text center-align">
-                            <h4>{{allstats.totalGame}}</h4>
-                            <p>Parties jouées</p>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <div class="card-panel grey lighten-5 black-text center-align">
-                            <h4>{{allstats.totalArbitratorGame}}</h5>
-                            <p>Match nuls</p>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <div class="card-panel grey lighten-5 black-text center-align">
-                            <h4>{{allstats.totalPoints}}</h5>
-                            <p>Points marqués</p>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <div class="card-panel grey lighten-5 black-text center-align">
-                            <h4>{{allstats.totalPoints / (2*allstats.totalGame) | number:1}}</h5>
-                            <p>Moyen de points</p>
-                        </div>
-                    </div>
-                </div>
                       
                       <div class="row">
                           <div class="col l12">
-                              <h4>Les parties</h4>
+                              <h4>Les statistiques des invités</h4>
+                              
+                               <table class="striped centered">
+                                <thead>
+                                  <tr>
+                                      <th> 
+                                      
+                                          <a href="#" class="black-text" ng-click="sortType_guest = 'id'; sortReverse_guest = !sortReverse_guest">
+                                            Joueurs
+                                            <span ng-show="sortType_guest == 'id' && !sortReverse_guest" class="pink-text material-icons" style="font-size: 20px;">keyboard_arrow_down</span>
+                                            <span ng-show="sortType_guest == 'id' && sortReverse_guest" class="pink-text material-icons" style="font-size: 20px;">keyboard_arrow_up</span>
+                                            <span ng-show="sortType_guest != 'id'" class="grey-text text-lighten-1 material-icons" style="font-size: 20px;">sort</span>
+                                          </a>
+                                      
+                                      </th>
+                                      <th>
+                                      
+                                          <a href="#" class="black-text" ng-click="sortType_guest = 'win'; sortReverse_guest = !sortReverse_guest">
+                                            Victoires
+                                            <span ng-show="sortType_guest == 'win' && !sortReverse_guest" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_down</span>
+                                            <span ng-show="sortType_guest == 'win' && sortReverse_guest" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_up</span>
+                                            <span ng-show="sortType_guest != 'win'" class="grey-text text-lighten-1 material-icons" style="font-size: 16px;">sort</span>
+                                          </a>
+                                      </th>
+                                      <th>
+                                      
+                                          <a href="#" class="black-text" ng-click="sortType_guest = 'defeat'; sortReverse_guest = !sortReverse_guest">
+                                            Défaites
+                                            <span ng-show="sortType_guest == 'defeat' && !sortReverse_guest" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_down</span>
+                                            <span ng-show="sortType_guest == 'defeat' && sortReverse_guest" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_up</span>
+                                            <span ng-show="sortType_guest != 'defeat'" class="grey-text text-lighten-1 material-icons" style="font-size: 16px;">sort</span>
+                                          </a>
+                                      </th>
+                                      <th>
+                                      
+                                          <a href="#" class="black-text" ng-click="sortType_guest = 'total'; sortReverse_guest = !sortReverse_guest">
+                                            Parties
+                                            <span ng-show="sortType_guest == 'total' && !sortReverse_guest" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_down</span>
+                                            <span ng-show="sortType_guest == 'total' && sortReverse_guest" class="pink-text material-icons" style="font-size: 16px;">keyboard_arrow_up</span>
+                                            <span ng-show="sortType_guest != 'total'" class="grey-text text-lighten-1 material-icons" style="font-size: 16px;">sort</span>
+                                          </a>
+                                      </th>
+                                      <th>
+                                      
+                                            Taux de victoire
+                                      </th>
+                                          
+                                  </tr>
+                                </thead>
+
+                                <tbody>
+                                    
+                                    
+                                  <tr ng-repeat="lane in allstats.table_guests | orderBy:sortType_guest:sortReverse_guest">
+                                      <td><a href="#top" ng-click="changePlayer(lane.id)"><strong>{{ findPlayerById(lane.id).surname }}</strong></a></td>
+                                    <td>{{ lane.win }}</td>
+                                    <td>{{ lane.defeat }}</td>
+                                    <td>{{ lane.total }}</td>
+                                    <td>{{lane.win/lane.total | percentage:1}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              
+                          </div>
+                    </div>
+                      
+                      <div class="row">
+                          <div class="col l12">
+                              <h4>Toutes les parties</h4>
                               
                               
                                <table class="striped centered">
@@ -560,7 +637,6 @@
                 <div class="modal-content black-text">
                   <h4>En savoir plus</h4>
                   <p>Ce site a été créé simplement pour le fun. C'est marrant &ccedil;;a, pour le <em>fun</em>, pour le <em>FUN</em>. Bref&#133;</p>
-                  <p>Ce site a été créé simplement pour le fun. C'est marrant &ccedil;;a, pour le <em>fun</em>, pour le <em>FUN</em>. Bref&#133;</p>
                   <p>Pour ceux que cela intéresse, les libraires et outils utilisés sont les suivants :</p>
                     <ul>
                         <li>Angular</li>
@@ -573,6 +649,20 @@
                         <li>Material Icons</li>
                         <li>Materialize CSS</li>
                         <li>ProgressBar.js</li>
+                    </ul>
+                  <p><strong>Changelog :</strong></p>
+                    <ul style="margin-left: 16px;">
+                        <li>2016-09-26
+                            <ul style="margin-left: 32px;">
+                                <li style="list-style-type: square;">Ajout des invités de l'émission.</li>
+                                <li style="list-style-type: square;">Ajout du changelog.</li>
+                            </ul>
+                        </li>
+                        <li>2016-09-22
+                            <ul style="margin-left: 32px;">
+                                <li style="list-style-type: square;">Première mise en ligne.</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="modal-footer">
