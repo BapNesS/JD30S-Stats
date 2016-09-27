@@ -19,7 +19,7 @@ wApp.factory('DataTeams', function () {
 
 
 wApp.factory('DataAllStats', function () {
-    return {"allstats":{"table":[{"id":"bruno","win":"7","defeat":"4","total":"11"},{"id":"christina","win":"1","defeat":"5","total":"6"},{"id":"elliot","win":"1","defeat":"4","total":"5"},{"id":"vacher","win":"6","defeat":"3","total":"9"},{"id":"karina","win":"1","defeat":"4","total":"5"},{"id":"mikka","win":"5","defeat":"0","total":"5"},{"id":"niklaas","win":"0","defeat":"1","total":"1"}],"table_guests":[{"id":"kev","win":"0","defeat":"1","total":"1"},{"id":"gad","win":"1","defeat":"0","total":"1"}],"totalGame":"22","totalArbitratorGame":"7","totalPoints":"198","lastDate":"20160927"}};
+    return {"allstats":{"table":[{"id":"bruno","win":7,"defeat":4,"total":11},{"id":"christina","win":1,"defeat":5,"total":6},{"id":"elliot","win":1,"defeat":4,"total":5},{"id":"vacher","win":6,"defeat":3,"total":9},{"id":"karina","win":1,"defeat":4,"total":5},{"id":"mikka","win":5,"defeat":0,"total":5},{"id":"niklaas","win":0,"defeat":1,"total":1}],"table_guests":[{"id":"kev","win":0,"defeat":1,"total":1},{"id":"gad","win":1,"defeat":0,"total":1}],"totalGame":"22","totalArbitratorGame":"7","totalPoints":"198","lastDate":"20160927"}};
     
 });
 
