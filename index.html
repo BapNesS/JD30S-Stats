@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr-FR" ng-app="wApp">
     <head>
         
@@ -350,7 +350,6 @@
                                           </a>
                                       </th>
                                       <th>
-                                      
                                             Taux de victoire
                                       </th>
                                           
@@ -377,6 +376,13 @@
                           <div class="col l12">
                               <h4>Toutes les parties</h4>
                               
+                              <div class="center-align gamesFilters">
+                                  <span ng-repeat="mois in monthsOfGame">
+                                        <a class="waves-effect waves-light btn"
+                                           ng-class="gamesMonthFilter == mois.id ? 'light-blue' : 'grey lighten-3 z-depth-0 black-text'"
+                                           ng-click="changeMonthGame(mois.id)">{{mois.display}}</a>
+                                  </span>
+                              </div>
                               
                                <table class="striped centered">
                                 <thead>
@@ -407,9 +413,14 @@
                                 <tbody>
                                     
                                     
-                                  <tr ng-repeat="lane in games">
+                                  <tr ng-repeat="lane in games | filter: filterFunction">
                                     <td>{{ lane.date + "T00:00:00" | date:'dd/MM/yyyy' }}</td>
-                                    <td><a href="#top"  ng-click="changePlayer(lane.playerA_id)"><strong>{{ findPlayerById(lane.playerA_id).surname }}</strong></a></td>
+                                    <td>
+                                        
+                                        <a href="#top" ng-class="{{findIfIsGuest(lane.playerA_id)}} ? 'black-text' : (findPlayerById(lane.playerA_id).gender == 'TRUE' ? 'pink-text' : '')" ng-click="changePlayer(lane.playerA_id)"><strong>{{ findPlayerById(lane.playerA_id).surname }}</strong></a> <i ng-show="{{findIfIsGuest(lane.playerA_id)}}" class="fa fa-star amber-text text-darken-3" aria-hidden="true"></i>
+                                        
+                                      
+                                      </td>
                                     <td>
                                       <strong ng-show="lane.playerA_id == lane.winner_id">
                                       {{ lane.playerA_points }} pts 
@@ -430,7 +441,7 @@
                                       {{ lane.playerB_points }} pts 
                                           </span>
                                       </td>
-                                      <td><a href="#top"  ng-click="changePlayer(lane.playerB_id)"><strong>{{ findPlayerById(lane.playerB_id).surname }}</strong></a></td>
+                                      <td><i ng-show="{{findIfIsGuest(lane.playerB_id)}}" class="fa fa-star amber-text text-darken-3" aria-hidden="true"></i> <a href="#top" ng-class="{{findIfIsGuest(lane.playerA_id)}} ? 'black-text' : (findPlayerById(lane.playerB_id).gender == 'TRUE' ? 'pink-text' : '')"  ng-click="changePlayer(lane.playerB_id)"><strong>{{ findPlayerById(lane.playerB_id).surname }}</strong></a></td>
                                     <td>{{ findPlayerById(lane.arbitrator_id).surname }}</td>
                                   </tr>
                                 </tbody>
@@ -652,6 +663,12 @@
                     </ul>
                   <p><strong>Changelog :</strong></p>
                     <ul style="margin-left: 16px;">
+                        <li>2016-10-30
+                            <ul style="margin-left: 32px;">
+                                <li style="list-style-type: square;">Meilleur affichage de la liste des parties</li>
+                                <li style="list-style-type: square;">Filtre par mois sur la liste des parties</li>
+                            </ul>
+                        </li>
                         <li>2016-09-26
                             <ul style="margin-left: 32px;">
                                 <li style="list-style-type: square;">Ajout des invités de l'émission.</li>
