@@ -34,6 +34,13 @@ wApp.controller('WListAllStatsCtrl', function ($scope, DataPlayers, DataAllStats
         return $scope.gamesMonthFilter = newMonth;
     };
     
+    $scope.teamFilters = [{"teamId":"", "teamLabel":"Tout le monde"}, {"teamId":"guests", "teamLabel":"Seulement avec les invités"}];
+    $scope.teamFilterSelected = "";
+    
+    $scope.changeTeamFilterGame = function(newTeam) {
+        return $scope.teamFilterSelected = newTeam;
+    };
+    
     function getMonthInFrench(aMonth) {
         switch (aMonth) {
                 case "01":
@@ -94,9 +101,23 @@ wApp.controller('WListAllStatsCtrl', function ($scope, DataPlayers, DataAllStats
         })[0].surname;
       }
     
+    
+    
+     function findIfIsGuest(playerId) {
+        var guestPlayers = $scope.teams.filter( function(data) {return data.id == "guests";} )[0].players;
+        return guestPlayers.filter( function(data) { return playerId == data; } ).length > 0;
+      }
+    
     $scope.filterFunction = function(element) {
+        
+        var keepIt = true;
+        if ( $scope.teamFilterSelected != null && $scope.teamFilterSelected == "guests" ) {
+            keepIt = findIfIsGuest(element.playerA_id) || findIfIsGuest(element.playerB_id);
+        }
+        
+        
         var dateref = RegExp("^"+$scope.gamesMonthFilter);
-        return element.date.match(dateref) ? true : false;
+        return keepIt && (element.date.match(dateref) ? true : false);
     };
     
 });
