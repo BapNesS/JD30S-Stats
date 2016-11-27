@@ -27,6 +27,11 @@ h1, h2, h3, h4, h5, h6 {
 .firstContainer {
     margin-top: 24px;   
 }
+
+.gamesFilters {
+    margin-top: 8px;   
+    margin-bottom: 16px;   
+}
 .subtitle {
     font-weight: 400;
 }
