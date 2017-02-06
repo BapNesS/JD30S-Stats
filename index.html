@@ -376,7 +376,7 @@
                           <div class="col l12">
                               <h4>Toutes les parties</h4>
                               
-                              <div class="center-align gamesFilters">
+                              <div class="gamesFilters">
                                   <span ng-repeat="mois in monthsOfGame">
                                         <a class="waves-effect waves-light btn"
                                            ng-class="gamesMonthFilter == mois.id ? 'light-blue' : 'grey lighten-3 z-depth-0 black-text'"
@@ -384,7 +384,7 @@
                                   </span>
                               </div>
                               
-                              <div class="center-align">
+                              <div class="">
                                   <span ng-repeat="teamFilter in teamFilters">
                                         <a class="waves-effect waves-light btn"
                                            ng-class="teamFilterSelected == teamFilter.teamId ? 'light-blue' : 'grey lighten-3 z-depth-0 black-text'"
